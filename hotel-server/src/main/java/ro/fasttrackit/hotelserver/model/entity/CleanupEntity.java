@@ -7,9 +7,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -25,9 +24,8 @@ public class CleanupEntity {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
     private LocalDateTime date;
-    @ManyToMany
-    @ToString.Exclude
-    private List<DailyProcedureEntity> procedures;
+    @ManyToOne
+    private RoomEntity room;
     @CreationTimestamp
     private LocalDateTime createdOn;
     @UpdateTimestamp

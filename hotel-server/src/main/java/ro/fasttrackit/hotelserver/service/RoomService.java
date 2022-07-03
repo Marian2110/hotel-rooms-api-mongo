@@ -40,20 +40,22 @@ public class RoomService {
     public Optional<RoomEntity> patchRoom(Long id, JsonPatch room) {
         return roomRepository
                 .findById(id)
-                .map(roomEntity -> {
-                    ObjectMapper jsonMapper = new ObjectMapper();
-                    JsonNode jsonNode = jsonMapper
-                            .convertValue(
-                                    mapper.toApi(roomEntity),
-                                    JsonNode.class
-                            );
-                    try {
-                        JsonNode patchedJson = room.apply(jsonNode);
-                        return mapper.toEntity(jsonMapper.treeToValue(patchedJson, Room.class));
-                    } catch (JsonPatchException | JsonProcessingException e) {
-                        throw new IllegalArgumentException("Invalid patch + " + e.getMessage());
-                    }
-                });
+                .map(roomEntity -> getRoomEntity(room, roomEntity));
+    }
+
+    private RoomEntity getRoomEntity(JsonPatch room, RoomEntity roomEntity) {
+        ObjectMapper jsonMapper = new ObjectMapper();
+        JsonNode jsonNode = jsonMapper
+                .convertValue(
+                        mapper.toApi(roomEntity),
+                        JsonNode.class
+                );
+        try {
+            JsonNode patchedJson = room.apply(jsonNode);
+            return mapper.toEntity(jsonMapper.treeToValue(patchedJson, Room.class));
+        } catch (JsonPatchException | JsonProcessingException e) {
+            throw new IllegalArgumentException("Invalid patch + " + e.getMessage());
+        }
     }
 
     public Optional<RoomEntity> deleteRoom(Long id) {

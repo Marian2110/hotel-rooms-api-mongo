@@ -7,6 +7,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -24,6 +25,8 @@ public class DailyProcedureEntity {
     private Long id;
     private String name;
     private Integer outcome;
+    @ManyToOne
+    private CleanupEntity cleanup;
     @CreationTimestamp
     private LocalDateTime createdOn;
     @UpdateTimestamp
