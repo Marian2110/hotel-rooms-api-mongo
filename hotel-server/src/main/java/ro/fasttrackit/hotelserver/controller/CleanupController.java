@@ -12,6 +12,7 @@ import ro.fastrackit.model.CollectionResponse;
 import ro.fastrackit.model.PageInfo;
 import ro.fasttrackit.hotelserver.model.entity.CleanupEntity;
 import ro.fasttrackit.hotelserver.model.mapper.CleanupMapper;
+import ro.fasttrackit.hotelserver.service.CleanupService;
 
 @RestController
 @RequestMapping("/cleanups")

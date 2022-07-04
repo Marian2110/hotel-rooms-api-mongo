@@ -1,9 +1,10 @@
-package ro.fasttrackit.hotelserver.controller;
+package ro.fasttrackit.hotelserver.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import ro.fasttrackit.hotelserver.controller.CleanupRepository;
 import ro.fasttrackit.hotelserver.model.entity.CleanupEntity;
 
 @Service
