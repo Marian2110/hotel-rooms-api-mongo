@@ -22,7 +22,7 @@ public class CleanupController {
     private final CleanupMapper cleanupMapper;
 
     @GetMapping("/rooms/{id}")
-    public CollectionResponse<Cleanup> getCleanupsForRoom(@PathVariable Long id, Pageable pageable) {
+    public CollectionResponse<Cleanup> getCleanupsForRoom(@PathVariable String id, Pageable pageable) {
         Page<CleanupEntity> cleanups = cleanupService.getCleanupsForRoom(id, pageable);
         return CollectionResponse.<Cleanup>builder()
                 .content(cleanupMapper.toApi(cleanups.getContent()))

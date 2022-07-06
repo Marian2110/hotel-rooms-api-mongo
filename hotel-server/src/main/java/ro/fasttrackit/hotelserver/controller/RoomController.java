@@ -36,27 +36,27 @@ public class RoomController {
     }
 
     @GetMapping("/{id}")
-    public Room getRoom(@PathVariable Long id) {
+    public Room getRoom(@PathVariable String id) {
         return roomMapper.toApi(roomService
                 .getRoom(id)
                 .orElseThrow(() -> getResourceNotFoundException(id)));
     }
 
     @PatchMapping("/{id}")
-    public Room patchRoom(@PathVariable Long id, @RequestBody JsonPatch room) {
+    public Room patchRoom(@PathVariable String id, @RequestBody JsonPatch room) {
         return roomMapper.toApi(roomService
                 .patchRoom(id, room)
                 .orElseThrow(() -> getResourceNotFoundException(id)));
     }
 
     @DeleteMapping("/{id}")
-    public Room deleteRoom(@PathVariable Long id) {
+    public Room deleteRoom(@PathVariable String id) {
         return roomMapper.toApi(roomService
                 .deleteRoom(id)
                 .orElseThrow(() -> getResourceNotFoundException(id)));
     }
 
-    private ResourceNotFoundException getResourceNotFoundException(Long id) {
+    private ResourceNotFoundException getResourceNotFoundException(String id) {
         return ResourceNotFoundException.forEntity(Room.class, id);
     }
 

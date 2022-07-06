@@ -1,20 +1,18 @@
 package ro.fasttrackit.hotelserver.model.mapper;
 
-import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 import ro.fastrackit.model.Room;
 import ro.fasttrackit.hotelserver.model.entity.RoomEntity;
 
-@RequiredArgsConstructor
+@Component
 public class RoomMapper implements ModelMapper<Room, RoomEntity> {
-    private final HotelMapper hotelMapper;
 
     @Override
     public Room toApi(RoomEntity roomEntity) {
         return Room.builder()
-                .id(roomEntity.getId())
-                .number(roomEntity.getNumber())
-                .floor(roomEntity.getFloor())
-                .hotel(hotelMapper.toApi(roomEntity.getHotel()))
+                .id(roomEntity.id())
+                .number(roomEntity.number())
+                .floor(roomEntity.floor())
                 .build();
     }
 
@@ -24,7 +22,6 @@ public class RoomMapper implements ModelMapper<Room, RoomEntity> {
                 .id(room.id())
                 .number(room.number())
                 .floor(room.floor())
-                .hotel(hotelMapper.toEntity(room.hotel()))
                 .build();
     }
 

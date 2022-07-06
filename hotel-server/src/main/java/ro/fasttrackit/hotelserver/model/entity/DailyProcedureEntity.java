@@ -1,36 +1,21 @@
 package ro.fasttrackit.hotelserver.model.entity;
 
-import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import lombok.Builder;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 @Builder
-@Entity(name = "daily_procedure")
-@Setter
-@Getter
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
-public class DailyProcedureEntity {
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
-    private Long id;
-    private String name;
-    private Integer outcome;
-    @ManyToOne
-    private CleanupEntity cleanup;
-    @CreationTimestamp
-    private LocalDateTime createdOn;
-    @UpdateTimestamp
-    private LocalDateTime updatedOn;
+@Document(collection = "cleanups")
+public record DailyProcedureEntity(
+        @Id
+        String id,
+        LocalDateTime date,
+        RoomEntity room,
+        LocalDateTime createdOn,
+        LocalDateTime updatedOn
+) {
 }
 
 

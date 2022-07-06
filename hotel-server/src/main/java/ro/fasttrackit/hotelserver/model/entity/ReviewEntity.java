@@ -1,35 +1,22 @@
 package ro.fasttrackit.hotelserver.model.entity;
 
-import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
-@Builder
-@Entity(name = "review")
-@Setter
-@Getter
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
-public class ReviewEntity {
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
-    private Long id;
-    private Integer rating;
-    private String message;
-    private String touristName;
-    @CreationTimestamp
-    private LocalDateTime createdOn;
-    @UpdateTimestamp
-    private LocalDateTime updatedOn;
-    @ManyToOne
-    private RoomEntity room;
+@Document(collection = "reviews")
+public record ReviewEntity(
+        @Id
+        String id,
+        Integer rating,
+        String message,
+        String touristName,
+        @CreatedDate
+        LocalDateTime createdOn,
+        @LastModifiedDate
+        LocalDateTime updatedOn
+) {
 }

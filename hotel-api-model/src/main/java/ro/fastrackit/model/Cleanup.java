@@ -5,5 +5,5 @@ import lombok.Builder;
 import java.time.LocalDateTime;
 
 @Builder
-public record Cleanup(Long id, LocalDateTime date) {
+public record Cleanup(String id, LocalDateTime date) {
 }
