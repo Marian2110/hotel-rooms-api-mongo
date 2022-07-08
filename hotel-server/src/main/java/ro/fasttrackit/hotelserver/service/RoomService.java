@@ -14,6 +14,7 @@ import ro.fastrackit.model.Room;
 import ro.fasttrackit.hotelserver.model.entity.RoomEntity;
 import ro.fasttrackit.hotelserver.model.filter.RoomFilter;
 import ro.fasttrackit.hotelserver.model.mapper.RoomMapper;
+import ro.fasttrackit.hotelserver.repository.RoomDAO;
 import ro.fasttrackit.hotelserver.repository.RoomRepository;
 
 import java.util.Optional;
@@ -23,11 +24,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class RoomService {
     private final RoomRepository roomRepository;
+    private final RoomDAO roomDAO;
     private final RoomMapper mapper;
 
     public Page<RoomEntity> getAllRooms(RoomFilter criteria, Pageable pageable) {
-        log.info("Getting all rooms with criteria: {}", criteria);
-        return roomRepository.findAll(pageable);
+        return roomDAO.findBy(criteria, pageable);
     }
 
     public Optional<RoomEntity> getRoom(String id) {
