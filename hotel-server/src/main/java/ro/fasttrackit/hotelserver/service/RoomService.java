@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.fge.jsonpatch.JsonPatch;
 import com.github.fge.jsonpatch.JsonPatchException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import ro.fasttrackit.hotelserver.repository.RoomRepository;
 
 import java.util.Optional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class RoomService {
@@ -24,6 +26,7 @@ public class RoomService {
     private final RoomMapper mapper;
 
     public Page<RoomEntity> getAllRooms(RoomFilter criteria, Pageable pageable) {
+        log.info("Getting all rooms with criteria: {}", criteria);
         return roomRepository.findAll(pageable);
     }
 
@@ -57,6 +60,10 @@ public class RoomService {
             roomRepository.delete(roomEntity);
             return roomEntity;
         });
+    }
+
+    public RoomEntity createRoom(RoomEntity toEntity) {
+        return roomRepository.save(toEntity);
     }
 }
 

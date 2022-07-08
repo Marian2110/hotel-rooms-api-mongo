@@ -15,6 +15,8 @@ public record RoomEntity(
         String id,
         Integer number,
         Integer floor,
+        String hotelId,
+        FacilityEntity facility,
         @CreatedDate
         LocalDateTime createdOn,
         @LastModifiedDate

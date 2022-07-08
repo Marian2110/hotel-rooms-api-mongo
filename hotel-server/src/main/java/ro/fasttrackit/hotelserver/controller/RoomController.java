@@ -35,6 +35,11 @@ public class RoomController {
                 .build();
     }
 
+    @PostMapping
+    public Room createRoom(@RequestBody Room room) {
+        return roomMapper.toApi(roomService.createRoom(roomMapper.toEntity(room)));
+    }
+
     @GetMapping("/{id}")
     public Room getRoom(@PathVariable String id) {
         return roomMapper.toApi(roomService
